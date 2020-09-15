@@ -10,10 +10,9 @@ app.get('/', (req, res) => {
     pyProg.stdout.on('data', function(data) {
 
         console.log(data.toString());
-        res.write(data);
-        
+        res.write(data, function(err){res.end('ended')});
     });
-    res.end('end');
+    
 })
 
 app.listen(port, () => console.log('Application listening on port 10500!'))

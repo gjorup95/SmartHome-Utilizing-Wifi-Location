@@ -45,7 +45,7 @@ if __name__ == '__main__':
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
             sys.stdout.flush()
-            time.sleep(5)
+            time.sleep(1)
 
 
         # Reset by pressing CTRL + C
