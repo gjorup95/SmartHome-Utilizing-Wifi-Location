@@ -44,14 +44,15 @@ if __name__ == '__main__':
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(1)
+            sys.stdout.flush()
+            time.sleep(5)
+
 
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
 
-sys.stdout.flush()
 #myDistance = distance()
 #print("measured distance is" % myDistance)
 #sys.stdout.flush()
