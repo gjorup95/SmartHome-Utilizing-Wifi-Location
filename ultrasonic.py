@@ -39,19 +39,23 @@ def distance():
     
     
     return distance
-if __name__ == '__main__':
-    try:
-        while True:
-            dist = distance()
-            print ("Measured Distance = %.1f cm" % dist)
-            sys.stdout.flush()
-            time.sleep(1)
+dist = distance()
+print ("Measured Distance = %.1f cm" % dist)
+sys.stdout.flush()
 
-
-        # Reset by pressing CTRL + C
-    except KeyboardInterrupt:
-        print("Measurement stopped by User")
-        GPIO.cleanup()
+#if __name__ == '__main__':
+#    try:
+#        while True:
+#            dist = distance()
+#            print ("Measured Distance = %.1f cm" % dist)
+#            sys.stdout.flush()
+#            time.sleep(1)
+#
+#
+#        # Reset by pressing CTRL + C
+#    except KeyboardInterrupt:
+#        print("Measurement stopped by User")
+#        GPIO.cleanup()
 
 #myDistance = distance()
 #print("measured distance is" % myDistance)
