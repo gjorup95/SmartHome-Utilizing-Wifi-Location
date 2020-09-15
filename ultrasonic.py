@@ -39,7 +39,12 @@ def distance():
     
     
     return distance
-
-myDistance = distance()
-print("measured distance is" % myDistance)
-sys.stdout.flush()
+if __name__ == '__main__':
+    try:
+        while True:
+            dist = distance()
+            print ("Measured Distance = %.1f cm" % dist)
+            time.sleep(1)
+#myDistance = distance()
+#print("measured distance is" % myDistance)
+#sys.stdout.flush()
