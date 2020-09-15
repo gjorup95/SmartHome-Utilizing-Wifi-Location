@@ -1,4 +1,5 @@
 import Adafruit_DHT
+import sys
  
 # Set sensor type : Options are DHT11,DHT22 or AM2302
 sensor=Adafruit_DHT.DHT11
