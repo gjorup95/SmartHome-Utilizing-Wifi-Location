@@ -1,7 +1,7 @@
 const { time } = require('console');
 const express = require('express')
 const app = express()
-const port = 10500
+const port = 10503
 app.get('/', (req, res) => {
 
     const { spawn } = require('child_process');
@@ -16,4 +16,4 @@ app.get('/', (req, res) => {
     
 })
 
-app.listen(port, () => console.log('Application listening on port 10500!'))
+app.listen(port, () => console.log('Application listening on port 10503!'))
