@@ -36,8 +36,10 @@ def distance():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = (TimeElapsed * 34300) / 2
-    myDistance = distance
+    
+    
     return distance
 
-print("Distance is currently")
+myDistance = distance()
+print("measured distance is" % myDistance)
 sys.stdout.flush()
