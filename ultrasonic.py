@@ -39,5 +39,5 @@ def distance():
     myDistance = distance
     return distance
 
-print("Distance is currently" % myDistance)
+print("Distance is currently")
 sys.stdout.flush()
