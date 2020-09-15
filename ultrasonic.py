@@ -1,3 +1,3 @@
 import sys
-print(HejDetHerVirker)
+print('HejDetHerVirker')
 sys.stdout.flush()
