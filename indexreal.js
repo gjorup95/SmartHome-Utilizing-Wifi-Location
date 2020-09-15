@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 
         console.log(data.toString());
         res.write(data);
-          
+        res.end('end');    
     });
     
 })
