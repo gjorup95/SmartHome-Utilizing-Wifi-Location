@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 
     const { spawn } = require('child_process');
     const pyProg = spawn('python', ['ultrasonic.py']);
-    const pyTempHum = spawn('python', ['humTemp.py'])
+    const pyBlink = spawn('python', ['blink.py'])
 
     pyProg.stdout.on('data', function(data) {
 
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     pyTempHum.stdout.on('data', function(data){
         console.log(data.toString());
         res.write(data);
-        res.end('Ended temp and humidity.')
+        res.end('')
     })
     
 })
