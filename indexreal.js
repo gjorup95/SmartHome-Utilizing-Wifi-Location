@@ -11,8 +11,9 @@ app.get('/', (req, res) => {
 
         console.log(data.toString());
         res.write(data);
-        res.end('end');
+        
     });
+    res.end('end');
 })
 
 app.listen(port, () => console.log('Application listening on port 10500!'))
