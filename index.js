@@ -6,13 +6,19 @@ app.get('/', (req, res) => {
 
     const { spawn } = require('child_process');
     const pyProg = spawn('python', ['ultrasonic.py']);
+    const pyTempHum = spawn('python', ['humTemp.py'])
 
     pyProg.stdout.on('data', function(data) {
 
         console.log(data.toString());
         res.write(data);
-        res.end('end');    
+        res.end('ended distance sensors');    
     });
+    pyTempHum.stdout.on('data', function(data){
+        console.log(data.toString());
+        res.write(data);
+        res.end('Ended temp and humidity.')
+    })
     
 })
 
