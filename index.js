@@ -5,14 +5,14 @@ const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
 var sensorLib = require('node-dht-sensor');
-var output = "";
+var output ="";
 var dht_sensor = {
     initialize: function () {
         return sensorLib.initialize(11, 4);
     },
     read: function () {
         var readout = sensorLib.read();
-        output.concat('Temperature: ', readout.temperature.toFixed(2), 'C, ', 'humidity: ', readout.humidity.toFixed(2), '%');
+        output = "Temperature: '" + readout.temperature.toFixed(2) + "C, " + "humidity: " + readout.humidity.toFixed(2) + "%";
         console.log(output);
         setTimeout(function () {
             dht_sensor.read();
