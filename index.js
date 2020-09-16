@@ -7,15 +7,15 @@ var sensorLib = require('node-dht-sensor');
 var Gpio = require('onoff').Gpio; 
 var LED = new Gpio(17, 'out'); 
 var blinkInterval = setInterval(blinkLED, 2000);
-var ledState = false;
+var ledState = 0;
 function blinkLED() {
   if (LED.readSync() === 0) {
 
     LED.writeSync(1); //set output to 1 i.e turn led on
-    ledState = true;
+    ledState = 1;
   } else {
     LED.writeSync(0); //set output to 0 i.e. turn led off 
-    ledState = false;
+    ledState = 0;
  }
 }
 function endBlink() { 
@@ -49,6 +49,7 @@ if (dht_sensor.initialize()) {
 
 app.get('/', (req, res) => {
     const pyUltra = spawn('python', ['ultrasonic.py'])
+    console.log(ledState.toString());
     res.write(ledState);
     res.write(output);
     pyUltra.stdout.on('data', function(data) {
