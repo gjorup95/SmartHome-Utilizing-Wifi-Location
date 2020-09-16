@@ -1,7 +1,6 @@
-var exports = module.exports= {};
-exports.f1 = function() {
-var sensorLib = require('node-dht-sensor');
 
+var sensorLib = require('node-dht-sensor');
+var output;
 var dht_sensor = {
     initialize: function () {
         return sensorLib.initialize(11, 4);
@@ -21,4 +20,4 @@ if (dht_sensor.initialize()) {
 } else {
     console.warn('Failed to initialize sensor');
 }
-}
+module.exports.output = output;
