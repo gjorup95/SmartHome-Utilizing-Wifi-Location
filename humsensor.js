@@ -20,4 +20,4 @@ if (dht_sensor.initialize()) {
     console.warn('Failed to initialize sensor');
 }
 
-module.exports.output = getOutput;
+module.exports.output = this.output;
