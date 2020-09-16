@@ -13,6 +13,7 @@ var dht_sensor = {
     read: function () {
         var readout = sensorLib.read();
         output.concat('Temperature: ', readout.temperature.toFixed(2), 'C, ', 'humidity: ', readout.humidity.toFixed(2), '%');
+        console.log(output);
         setTimeout(function () {
             dht_sensor.read();
         }, 2000);
