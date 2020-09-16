@@ -1,6 +1,6 @@
 const { time } = require('console');
 const express = require('express')
-var f = require('./humSensor.js')
+var f = require('humSensor.js')
 const app = express()
 const port = 10503
 const { spawn } = require('child_process');
