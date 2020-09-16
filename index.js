@@ -6,7 +6,7 @@ const { spawn } = require('child_process');
 var sensorLib = require('node-dht-sensor');
 var Gpio = require('onoff').Gpio; 
 var LED = new Gpio(17, 'out'); 
-var blinkInterval = setInterval(blinkLED, 500); 
+var blinkInterval = setInterval(blinkLED, 2000); 
 function blinkLED() {
   if (LED.readSync() === 0) {
     LED.writeSync(1); //set output to 1 i.e turn led on
@@ -45,6 +45,7 @@ if (dht_sensor.initialize()) {
 
 app.get('/', (req, res) => {
     const pyUltra = spawn('python', ['ultrasonic.py'])
+    res.write(LED.readSync);
     res.write(output);
     pyUltra.stdout.on('data', function(data) {
         console.log(data.toString());
