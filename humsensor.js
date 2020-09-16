@@ -21,4 +21,3 @@ if (dht_sensor.initialize()) {
 }
 
 module.exports.output = this.output;
-module.exports.dht_sensor = dht_sensor;

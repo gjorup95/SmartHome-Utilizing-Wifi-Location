@@ -5,8 +5,6 @@ const app = express()
 const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
-tempHum.dht_sensor.initialize();
-tempHum.dht_sensor.read();
 app.get('/', (req, res) => {
     console.log(tempHum.output);
     const pyUltra = spawn('python', ['ultrasonic.py'])
