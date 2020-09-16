@@ -17,5 +17,5 @@ while True:
     on()
     off()
 
-sys.stdout(LED_STATE)
+sys.stdout.write(LED_STATE)
 sys.stdout.flush()
