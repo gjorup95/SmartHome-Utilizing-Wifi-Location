@@ -7,7 +7,8 @@ var dht_sensor = {
     },
     read: function () {
         var readout = sensorLib.read();
-        output.concat(readout.temperature.toFixed(2));
+        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+            'humidity: ' + readout.humidity.toFixed(2) + '%');
         setTimeout(function () {
             dht_sensor.read();
         }, 2000);
@@ -20,4 +21,3 @@ if (dht_sensor.initialize()) {
     console.warn('Failed to initialize sensor');
 }
 
-module.exports.dht_sensor.read = dht_sensor.read;
