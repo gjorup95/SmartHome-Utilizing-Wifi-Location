@@ -1,17 +1,12 @@
 const { time } = require('console');
 const express = require('express')
+var f = require('./humSensor.js')
 const app = express()
 const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
 app.get('/', (req, res) => {
-    var url = "humSensor.js";
-    
-    $.getScript(url, function(){
-        $(document).ready(function(){
-            console.log(output); // Prints: Hi there!
-        });
-    });
+    f.f1();
     const pyUltra = spawn('python', ['ultrasonic.py'])
     pyUltra.stdout.on('data', function(data) {
         console.log(data.toString());
