@@ -15,8 +15,7 @@ app.get('/', (req, res) => {
     });
     pyBlink.stdout.on('data', function(data){
         console.log(data.toString());
-        res.write(data);
-        res.end('')
+        res.send(data);
     });
     
 })
