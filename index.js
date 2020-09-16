@@ -49,7 +49,7 @@ if (dht_sensor.initialize()) {
 
 app.get('/', (req, res) => {
     const pyUltra = spawn('python', ['ultrasonic.py'])
-    res.write(ledState.toString());
+    res.write("Led is: " + ledState.toString());
     res.write(output);
     pyUltra.stdout.on('data', function(data) {
         console.log(data.toString());
