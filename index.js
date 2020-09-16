@@ -8,8 +8,7 @@ const pyBlink = spawn('python', ['blink.py']);
 tempHum.dht_sensor.initialize();
 tempHum.dht_sensor.read();
 app.get('/', (req, res) => {
-    console.log(tempHum.dht_sensor.readout.temperature.toFixed(2));
-    
+    console.log(tempHum.output);
     const pyUltra = spawn('python', ['ultrasonic.py'])
     pyUltra.stdout.on('data', function(data) {
         console.log(data.toString());
