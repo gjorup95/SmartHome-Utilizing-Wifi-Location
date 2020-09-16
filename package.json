@@ -1,0 +1,21 @@
+{
+  "name": "p2p-project-2020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "onoff": "^6.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.au.dk:au564192/p2p-project-2020.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
