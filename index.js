@@ -5,7 +5,7 @@ const port = 10503
 const { spawn } = require('child_process');
 var sensorLib = require('node-dht-sensor');
 var Gpio = require('onoff').Gpio; 
-var LED = new Gpio(11, 'out'); 
+var LED = new Gpio(17, 'out'); 
 var blinkInterval = setInterval(blinkLED, 500); 
 function blinkLED() {
   if (LED.readSync() === 0) {
@@ -20,7 +20,7 @@ function endBlink() {
 
   LED.unexport(); // Unexport GPIO to free resources
 }
-setTimeout(endBlink, 2000);
+//setTimeout(endBlink, 2000);
 var output ="";
 var dht_sensor = {
     initialize: function () {
