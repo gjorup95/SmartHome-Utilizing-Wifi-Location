@@ -6,6 +6,7 @@ const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
 app.get('/', (req, res) => {
+    console.log(tempHum.output.toString());
     res.write(tempHum.output);
     const pyUltra = spawn('python', ['ultrasonic.py'])
     pyUltra.stdout.on('data', function(data) {
