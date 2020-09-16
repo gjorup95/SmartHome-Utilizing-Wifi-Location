@@ -15,7 +15,7 @@ var dht_sensor = {
 };
 
 if (dht_sensor.initialize()) {
-    dht_sensor.read();
+   var output = dht_sensor.read();
 } else {
     console.warn('Failed to initialize sensor');
 }
