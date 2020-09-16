@@ -14,10 +14,11 @@ var dht_sensor = {
         }, 2000);
     }
 };
-
+function getReading(){
 if (dht_sensor.initialize()) {
-   var output = dht_sensor.read();
+    return dht_sensor.read();
 } else {
     console.warn('Failed to initialize sensor');
 }
-module.exports.output = output;
+}
+module.exports.getReading = getReading;
