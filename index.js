@@ -4,7 +4,7 @@ const app = express()
 const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
-const humSensor = spawn('javascript', ['humsensor.js']);
+const humSensor = spawn('node', ['humsensor.js']);
 app.get('/', (req, res) => {
     const pyUltra = spawn('python', ['ultrasonic.py'])
     pyUltra.stdout.on('data', function(data) {
