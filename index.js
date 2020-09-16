@@ -5,6 +5,7 @@ const app = express()
 const port = 10503
 const { spawn } = require('child_process');
 const pyBlink = spawn('python', ['blink.py']);
+tempHum.read();
 app.get('/', (req, res) => {
     console.log(tempHum.output);
     
