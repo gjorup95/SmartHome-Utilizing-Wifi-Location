@@ -12,12 +12,11 @@ app.get('/', (req, res) => {
 
         console.log(data.toString());
         res.write(data); 
-        res.end('')
-    });
-    pyBlink.stdout.on('data', function(data){
-        console.log(data.toString());
-        res.write(data);
-        res.end('')
+        pyBlink.stdout.on('data', function(data){
+            console.log(data.toString());
+            res.write(data);
+            res.end('')
+        });
     });
     
 })
