@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
     res.write("Led is: " + ledState.toString() + "  -  ");
     res.write(output);
     pyUltra.stdout.on('data', function(data) {
-        console.log(data.toString());
+        //console.log(data.toString());
         res.write(data); 
         res.end('')
     });
