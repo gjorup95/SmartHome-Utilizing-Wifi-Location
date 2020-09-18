@@ -1,0 +1,42 @@
+{
+    "pi": {
+        "name": "Gjorup PI",
+        "description": "a web of things connected raspberry pi for the course p2p",
+        "port": 10503,
+        "sensors": {
+            "temperature": {
+                "name": "Temperature Sensor",
+                "description": "A dht11 temperature sensor",
+                "unit": "Celsius",
+                "value": 0,
+                "gpio": 4
+            },
+            "humidity": {
+                "name": "Humidity Sensor",
+                "description": "A dht11 humidity sensor",
+                "unit": "%",
+                "value": 0,
+                "gpio": 4
+            }
+        },
+        "actuators": {
+            "leds": {
+                "1": {
+                    "name": "LED 1",
+                    "value": false,
+                    "gpio":  17
+                },
+                "2": {
+                    "name": "LED 2",
+                    "value": false,
+                    "gpio": 2
+                },
+                "3": {
+                    "name":"LED 3",
+                    "value": false,
+                    "gpio": 22
+                }
+            }
+        }
+    }
+}
