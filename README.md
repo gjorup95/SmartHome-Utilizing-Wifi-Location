@@ -9,5 +9,6 @@ Echo GPIO = 24
 
 Instructions:
 git clone https://gitlab.au.dk/au564192/p2p-project-2020.git
+git checkout branch milestone2
 sudo npm install
-node index.js
+sudo node server.js
