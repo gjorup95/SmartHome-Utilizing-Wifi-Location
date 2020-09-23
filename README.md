@@ -8,7 +8,7 @@ sudo node server.js
 
 # Website interaction
 Access to website http://62.107.22.177:10503/pi
-1. Press button update to fetch through get request the value of sensors.
+1. Press button update, to fetch the value of sensors through 'GET' request.
 2. Press button state random led to randomize state of the 3 LEDS through PUT requests.
 
 
