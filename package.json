@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bl": "^4.0.3",
+    "coap": "^0.24.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "onoff": "^6.0.0"
+    "msgpack5": "^4.2.1",
+    "node-json2html": "^1.4.0",
+    "onoff": "^6.0.0",
+    "pigpio": "^3.2.3",
+    "ws": "^7.3.1"
   },
   "devDependencies": {},
   "scripts": {
