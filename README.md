@@ -18,4 +18,4 @@ LED2 GPIO = 2  \
 LED3 GPIO = 22  \
 Humidity/temp GPIO = 4  \
 Trigger GPIO = 23  \
-Echo GPIO = 24  \
+Echo GPIO = 24  
