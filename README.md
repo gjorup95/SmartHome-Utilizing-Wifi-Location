@@ -2,7 +2,7 @@
 Instructions:
 git clone https://gitlab.au.dk/au564192/p2p-project-2020.git
 git fetch
-git checkout branch milestone2
+git checkout- milestone2
 sudo npm install
 sudo node server.js
 
