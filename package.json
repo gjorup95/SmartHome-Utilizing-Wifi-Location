@@ -2,7 +2,7 @@
   "name": "p2p-project-2020",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "bl": "^4.0.3",
     "coap": "^0.24.0",
