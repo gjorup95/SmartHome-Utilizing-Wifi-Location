@@ -13,7 +13,7 @@ Access to website http://62.107.22.177:10503/pi
 
 
 # GPIO:
-LED1 GPIO = 17  /
+LED1 GPIO = 17  \
 LED2 GPIO = 2  /
 LED3 GPIO = 22  /
 Humidity/temp GPIO = 4  /
