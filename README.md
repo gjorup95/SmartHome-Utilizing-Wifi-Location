@@ -1,10 +1,10 @@
 # P2P Project 2020
 Instructions:
-git clone https://gitlab.au.dk/au564192/p2p-project-2020.git
-git fetch
-git checkout milestone2
-sudo npm install
-sudo node server.js
+1. git clone https://gitlab.au.dk/au564192/p2p-project-2020.git
+2. git fetch
+3. git checkout milestone2
+4. sudo npm install
+5. sudo node server.js
 
 # Website interaction
 Access to website http://62.107.22.177:10503/pi
