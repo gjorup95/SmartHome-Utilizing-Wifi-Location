@@ -18,3 +18,7 @@ LED3 GPIO = 22  \
 Humidity/temp GPIO = 4  \
 Trigger GPIO = 23  \
 Echo GPIO = 24  
+
+# Docker
+1. docker pull gjorup95/milestone2
+2. sudo docker run --rm -it -p 10503:10503 --privileged gjorup95/milestone2:latest
