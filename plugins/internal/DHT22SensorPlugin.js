@@ -1,5 +1,4 @@
-var resources = require('./../../resources/model'),
-  utils = require('./../../utils/utils.js');
+var resources = require('./../../resources/model');
 
 var interval, sensor;
 var model = resources.pi.sensors;
@@ -49,14 +48,6 @@ function connectHardware() {
   }
 };
 
-function simulate() {
-  interval = setInterval(function () {
-    model.temperature.value = utils.randomInt(0, 40);
-    model.humidity.value = utils.randomInt(0, 100);
-    showValue();
-  }, localParams.frequency);
-  console.info('Simulated %s sensor started!', pluginName);
-};
 
 function showValue() {
   console.info('Temperature: %s C, humidity %s \%',

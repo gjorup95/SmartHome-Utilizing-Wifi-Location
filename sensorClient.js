@@ -1,4 +1,13 @@
 'use strict';
+var resources = require('./resources/model');
+var ledsPlugin = require('./plugins/internal/ledsPlugin'), //#A
+  dhtPlugin = require('./plugins/internal/DHT22SensorPlugin'), //#A
+  ultraSonic = require('./plugins/internal/ultrasonicPlugin');
+
+
+ledsPlugin.start({'simulate': false, 'frequency': 10000}); //#B
+dhtPlugin.start({'simulate': false, 'frequency': 10000}); //#B
+ultraSonic.start({'simulate': false, 'frequency': 10000});
 
 const Protocol = require('azure-iot-device-mqtt').Mqtt;
 // Uncomment one of these transports and then change it in fromConnectionString to test other transports
@@ -35,10 +44,15 @@ function messageHandler (msg) {
 }
 
 function generateMessage () {
+    const distance = resources.pi.sensors.distance.value;
+    const humidity = resources.pi.sensors.humidity.value;
+    const temperature = resources.pi.sensors.temperature.value;
+    const led1 = resources.pi.actuators.leds[1].value;
+    /*
     const windSpeed = 10 + (Math.random() * 4); // range: [10, 14]
     const temperature = 20 + (Math.random() * 10); // range: [20, 30]
-    const humidity = 60 + (Math.random() * 20); // range: [60, 80]
-    const data = JSON.stringify({ deviceId: 'myFirstDevice', windSpeed: windSpeed, temperature: temperature, humidity: humidity });
+    const humidity = 60 + (Math.random() * 20); // range: [60, 80] */
+    const data = JSON.stringify({ deviceId: 'Gjorup001', distance: distance, temperature: temperature, humidity: humidity, led1State: led1 });
     const message = new Message(data);
     message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
     return message;

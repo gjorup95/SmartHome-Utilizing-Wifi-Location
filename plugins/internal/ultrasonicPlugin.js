@@ -1,5 +1,4 @@
-var resources = require('../../resources/model'),
-  utils = require('../../utils/utils.js');
+var resources = require('../../resources/model');
   var sensor;
   var model = resources.pi.sensors;
   var pluginName = 'Ultrasonic distance sensor';
@@ -8,12 +7,8 @@ var resources = require('../../resources/model'),
   const trigger = new Gpio(23, {mode: Gpio.OUTPUT});
   const echo = new Gpio(24, {mode: Gpio.INPUT, alert: true});
   trigger.digitalWrite(0); // Make sure trigger is low
+
 exports.start = function (params){
-  
-  
-  
-  
-  
   
   const watchHCSR04 = () => {
     let startTick;
