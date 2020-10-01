@@ -1,7 +1,12 @@
 // Final version
-var httpServer = require('./servers/http'),
- wsServer = require('./servers/websockets'),
-  resources = require('./resources/model');
+const express = require('express');
+const port = '10503';
+const http = require('http');
+const WebSocket = require('ws');
+const path = require('path');
+const EventHubReader = require('./scripts/event-hub-reader.js');
+const iotHubConnectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
+var resources = require('./resources/model');
 
 // Internal Plugins
 
@@ -14,12 +19,3 @@ ledsPlugin.start({'simulate': false, 'frequency': 10000}); //#B
 dhtPlugin.start({'simulate': false, 'frequency': 10000}); //#B
 ultraSonic.start({'simulate': false, 'frequency': 10000});
 
-// HTTP Server
-var server = httpServer.listen(resources.pi.port, function () {
-  console.log('HTTP server started...');
-
-   //Websockets server
-  wsServer.listen(server);
-
-  console.info('Your WoT Pi is up and running on port %s', resources.pi.port);
-});
