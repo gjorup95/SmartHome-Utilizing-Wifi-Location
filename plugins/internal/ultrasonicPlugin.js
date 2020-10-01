@@ -41,4 +41,5 @@ exports.start = function (params){
 
 exports.stop = function(){
  clearInterval();
+ Gpio.terminate();
 }
