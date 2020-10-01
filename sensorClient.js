@@ -44,13 +44,13 @@ function messageHandler (msg) {
 }
 
 function generateMessage () {
-    const distance = resources.pi.sensors.distance.value;
+    const distanceData = resources.pi.sensors.distance.value;
     const humidity = resources.pi.sensors.humidity.value;
     const temperature = resources.pi.sensors.temperature.value;
-    const led1 = resources.pi.actuators.leds[1].value;
-    const led2 = resources.pi.actuators.leds[2].value;
-    const led3 = resources.pi.actuators.leds[3].value;
-    const data = JSON.stringify({ deviceId: 'Gjorup001', distance: distance, temperature: temperature, humidity: humidity, led1State: led1, led2State: led2, led3State: led3 });
+    const led1State = resources.pi.actuators.leds[1].value;
+    const led2State = resources.pi.actuators.leds[2].value;
+    const led3State = resources.pi.actuators.leds[3].value;
+    const data = JSON.stringify({ deviceId: 'Gjorup001', distanceData: distanceData, temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State});
     const message = new Message(data);
     message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
     return message;
