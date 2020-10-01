@@ -9,14 +9,56 @@
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/chart-device-data.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/sendCloudToDeviceMessage.js" type="text/javascript" charset="utf-8"></script>
+    <script data-main="scripts/main" src="js/require.js"></script>
     <link href="css/style.css" rel="stylesheet" />
 
     <title>Temperature &amp; Humidity Real-time Data</title>
 </head>
 
 <body>
-    <button type="button" id="buttonRandom" onclick="callDevice()">Randomize LED States</button>
+    <button id=buttonRandom>Randomize LED States</button>
+    <script>document.getElementById("buttonRandom").addEventListener("click", randomMessageScript)
+    function randomMessageScript(){
+'use strict';
+  
+var Client = require('azure-iothub').Client;
+var Message = require('azure-iot-common').Message;
+
+var connectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
+var targetDevice = 'GjorupPi001';
+
+var serviceClient = Client.fromConnectionString(connectionString);
+
+function printResultFor(op) {
+    return function printResult(err, res) {
+      if (err) console.log(op + ' error: ' + err.toString());
+      if (res) console.log(op + ' status: ' + res.constructor.name);
+    };
+  }
+  
+  function receiveFeedback(err, receiver){
+    receiver.on('message', function (msg) {
+      console.log('Feedback message:')
+      console.log(msg.getData().toString('utf-8'));
+    });
+  }
+
+  serviceClient.open(function (err) {
+    if (err) {
+      console.error('Could not connect: ' + err.message);
+    } else {
+      console.log('Service client connected');
+      serviceClient.getFeedbackReceiver(receiveFeedback);
+      var message = new Message('Cloud to device message.');
+      message.ack = 'full';
+      const randomState = Math.floor(Math.random() * Math.floor(3));
+      message.data = JSON.stringify({randomState: randomState});
+      message.messageId = "My Message ID";
+      console.log('Sending message: ' + message.getData());
+      serviceClient.send(targetDevice, message, printResultFor('send'));
+    }
+  });
+}</script>
     
     <p> Display of LEDS - States 0 on, 1 off and 2 blink</p>
     <div id=led1>0</div>

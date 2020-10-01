@@ -1,3 +1,5 @@
+sendToDevice();
+function sendToDevice(){
 'use strict';
   
 var Client = require('azure-iothub').Client;
@@ -37,3 +39,4 @@ function printResultFor(op) {
       serviceClient.send(targetDevice, message, printResultFor('send'));
     }
   });
+}

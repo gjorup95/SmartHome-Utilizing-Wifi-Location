@@ -41,8 +41,11 @@ function disconnectHandler () {
 function messageHandler (msg) {
     console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
     client.complete(msg, printResultFor('completed'));
+    var json = JSON.parse(msg.data);
+    for (i=1; i<4; i++){
+        resources.pi.actuators.leds[i].value = json.randomState;
     
-    
+}
 }
 
 function generateMessage () {
