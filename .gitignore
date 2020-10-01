@@ -22,7 +22,7 @@ coverage
 .grunt
 
 #distribution generated locally
-dist/
+/dist
 # node-waf configuration
 .lock-wscript
 
