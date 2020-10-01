@@ -23,6 +23,7 @@ coverage
 
 #distribution generated locally
 /dist
+/plugins/distribution
 # node-waf configuration
 .lock-wscript
 
