@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@azure/event-hubs": ">=5.0.2",
     "azure-iot-device": "^1.17.2",
     "azure-iot-device-amqp": "^1.13.2",
     "azure-iot-device-mqtt": "^1.15.2",

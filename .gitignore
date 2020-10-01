@@ -25,6 +25,7 @@ coverage
 /dist
 /plugins/internal/dist
 
+
 # node-waf configuration
 .lock-wscript
 
