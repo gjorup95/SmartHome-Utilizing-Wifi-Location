@@ -1,6 +1,4 @@
 'use strict';
-callDevice();
-function callDevice() {
   
 var Client = require('azure-iothub').Client;
 var Message = require('azure-iot-common').Message;
@@ -32,9 +30,10 @@ function printResultFor(op) {
       serviceClient.getFeedbackReceiver(receiveFeedback);
       var message = new Message('Cloud to device message.');
       message.ack = 'full';
+      const randomState = Math.floor(Math.random() * Math.floor(3));
+      message.data = JSON.stringify({randomState: randomState});
       message.messageId = "My Message ID";
       console.log('Sending message: ' + message.getData());
       serviceClient.send(targetDevice, message, printResultFor('send'));
     }
   });
-}

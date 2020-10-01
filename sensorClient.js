@@ -41,6 +41,8 @@ function disconnectHandler () {
 function messageHandler (msg) {
     console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
     client.complete(msg, printResultFor('completed'));
+    
+    
 }
 
 function generateMessage () {
