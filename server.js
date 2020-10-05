@@ -4,9 +4,7 @@ const port = '10503';
 const http = require('http');
 const WebSocket = require('ws');
 var Client = require('azure-iothub').Client;
-process.on("SIGINT", function(){
-  clearInterval(LedRoutine);
-});
+
 const deviceId = 'GjorupPi001'
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
