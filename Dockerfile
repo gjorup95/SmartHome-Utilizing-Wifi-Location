@@ -22,4 +22,4 @@ RUN npm install
 EXPOSE 10503
 
 
-CMD ["node", "server.js"]
+CMD ["node", "sensorClient.js"]
