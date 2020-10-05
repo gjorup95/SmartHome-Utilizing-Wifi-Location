@@ -10,6 +10,7 @@
     "azure-iot-device-mqtt": "^1.15.2",
     "azure-iothub": "^1.13.0",
     "bl": "^4.0.3",
+    "chalk": "^4.1.0",
     "coap": "^0.24.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

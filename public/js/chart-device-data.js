@@ -5,6 +5,7 @@ $(document).ready(() => {
   // if deployed to a site supporting SSL, use wss://
   const protocol = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
   const webSocket = new WebSocket(protocol + location.host);
+  //var prov = require('./../../server.js');
 
   // A class for holding the last N points of telemetry for a device
   class DeviceData {
@@ -67,6 +68,7 @@ $(document).ready(() => {
     document.getElementById('led2').innerHTML = device.led2[device.led2.length - 1];
     document.getElementById('led3').innerHTML = device.led3[device.led3.length - 1];
     document.getElementById('ultra').innerHTML = device.distanceData[device.distanceData.length - 1];
+    
   }
   const trackedDevices = new TrackedDevices();
 
@@ -146,6 +148,7 @@ $(document).ready(() => {
     UpdateOtherLayout(device);
   }
   listOfDevices.addEventListener('change', OnSelectionChange, false);
+  //buttonRandom.onclick = function () {prov.sendChangeLed}
   
   // When a web socket message arrives:
   // 1. Unpack it
@@ -179,6 +182,7 @@ $(document).ready(() => {
           messageData.IotData.led2State, messageData.IotData.led3State);
         // add device to the UI list
         // add text for element id
+        UpdateOtherLayout(newDeviceData);
         
         const node = document.createElement('option');
         const nodeText = document.createTextNode(messageData.DeviceId);
@@ -194,7 +198,11 @@ $(document).ready(() => {
       }
 
       myLineChart.update();
+       if (existingDeviceData){
       UpdateOtherLayout(existingDeviceData);
+       }
+       
+       
     } catch (err) {
       console.error(err);
     }

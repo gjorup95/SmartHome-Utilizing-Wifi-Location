@@ -1,4 +1,5 @@
 'use strict';
+
 var resources = require('./resources/model');
 var ledsPlugin = require('./plugins/internal/ledsPlugin'), //#A
   dhtPlugin = require('./plugins/internal/DHT22SensorPlugin'), //#A
@@ -10,19 +11,48 @@ dhtPlugin.start({'simulate': false, 'frequency': 10000}); //#B
 ultraSonic.start({'simulate': false, 'frequency': 10000});
 
 const Protocol = require('azure-iot-device-mqtt').Mqtt;
-// Uncomment one of these transports and then change it in fromConnectionString to test other transports
-// const Protocol = require('azure-iot-device-amqp').AmqpWs;
-// const Protocol = require('azure-iot-device-http').Http;
-// const Protocol = require('azure-iot-device-amqp').Amqp;
-// const Protocol = require('azure-iot-device-mqtt').MqttWs;
+
 const Client = require('azure-iot-device').Client;
 const Message = require('azure-iot-device').Message;
+
 
 // String containing Hostname, Device Id & Device Key in the following formats:
 //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
 const deviceConnectionString = "HostName=GjorupPi.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=MYrYqGrUPYFcEymr8os4vNpGTTzvGSRGNf24F9S1j4U=";
+let client = Client.fromConnectionString(deviceConnectionString, Protocol);
 let sendInterval;
 
+function onSetLedRandom(request, response) {
+    // Function to send a direct method reponse to your IoT hub.
+    function directMethodResponse(err) {
+      if(err) {
+        console.error('An error ocurred when sending a method response:\n' + err.toString());
+      } else {
+          console.log('Response to method \'' + request.methodName + '\' sent successfully.' );
+      }
+    }
+  
+    console.log('Direct method payload received:');
+    for (i=1; i<4; i++){
+        resources.pi.actuators.leds[i].value = request.payload;
+    
+}
+    console.log(request.payload);
+  
+    // Check that a numeric value was passed as a parameter
+    if (isNaN(request.payload)) {
+      console.log('Invalid interval response received in payload');
+      // Report failure back to your hub.
+      response.send(400, 'Invalid direct method parameter: ' + request.payload, directMethodResponse);
+  
+    } else {
+  
+      
+  
+      // Report success back to your hub.
+      response.send(200, 'States of all leds set to:  ' + request.payload, directMethodResponse);
+    }
+  }
 function disconnectHandler () {
     clearInterval(sendInterval);
     client.open().catch((err) => {
@@ -30,23 +60,12 @@ function disconnectHandler () {
     });
 }
 
-// The AMQP and HTTP transports have the notion of completing, rejecting or abandoning the message.
-// For example, this is only functional in AMQP and HTTP:
-// client.complete(msg, printResultFor('completed'));
-// If using MQTT calls to complete, reject, or abandon are no-ops.
-// When completing a message, the service that sent the C2D message is notified that the message has been processed.
-// When rejecting a message, the service that sent the C2D message is notified that the message won't be processed by the device. the method to use is client.reject(msg, callback).
-// When abandoning the message, IoT Hub will immediately try to resend it. The method to use is client.abandon(msg, callback).
-// MQTT is simpler: it accepts the message by default, and doesn't support rejecting or abandoning a message.
 function messageHandler (msg) {
     console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
     client.complete(msg, printResultFor('completed'));
-    var json = JSON.parse(msg.data);
-    for (i=1; i<4; i++){
-        resources.pi.actuators.leds[i].value = json.randomState;
     
 }
-}
+client.onDeviceMethod('SetLedRandom', onSetLedRandom);
 
 function generateMessage () {
     const distanceData = resources.pi.sensors.distance.value;
@@ -77,7 +96,7 @@ function connectCallback () {
 }
 
 // fromConnectionString must specify a transport constructor, coming from any transport package.
-let client = Client.fromConnectionString(deviceConnectionString, Protocol);
+
 
 client.on('connect', connectCallback);
 client.on('error', errorCallback);

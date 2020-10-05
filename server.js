@@ -1,10 +1,15 @@
+'use strict';
 const express = require('express');
 const port = '10503';
 const http = require('http');
 const WebSocket = require('ws');
+var Client = require('azure-iothub').Client;
+
+const deviceId = 'GjorupPi001'
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
 const iotHubConnectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
+var client = Client.fromConnectionString(iotHubConnectionString);
 if (!iotHubConnectionString) {
   console.error(`Environment variable IotHubConnectionString must be specified.`);
   return;
@@ -63,5 +68,21 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
     }
   });
 })().catch();
+exports.sendChangeLed = function() {
+var methodParams = {
+  methodName: 'SetLedRandom',
+  payload: Math.floor(Math.random() * Math.floor(3)), // Number of seconds.
+  responseTimeoutInSeconds: 30
+};
 
+// Call the direct method on your device using the defined parameters.
+client.invokeDeviceMethod(deviceId, methodParams, function (err, result) {
+  if (err) {
+      console.error('Failed to invoke method \'' + methodParams.methodName + '\': ' + err.message);
+  } else {
+      console.log('Response from ' + methodParams.methodName + ' on ' + deviceId + ':');
+      console.log(JSON.stringify(result, null, 2));
+  }
+});
+};
 

@@ -24,6 +24,8 @@ coverage
 #distribution generated locally
 /dist
 /plugins/internal/dist
+/public/js/dist
+/public/dist
 
 
 # node-waf configuration
