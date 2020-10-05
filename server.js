@@ -63,3 +63,5 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
     }
   });
 })().catch();
+
+
