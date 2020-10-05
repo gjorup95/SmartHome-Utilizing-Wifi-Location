@@ -2,7 +2,7 @@
   "name": "p2p-project-2020",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "sensorClient.js",
   "dependencies": {
     "azure-iot-device": "^1.17.2",
     "azure-iot-device-mqtt": "^1.15.2",
@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "sudo node server.js"
+    "start": "sudo node sensorClient.js"
   },
   "repository": {
     "type": "git",
