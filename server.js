@@ -3,16 +3,18 @@ const express = require('express');
 const port = '10503';
 const http = require('http');
 const WebSocket = require('ws');
-//var Client = require('azure-iothub').Client;
-
-//const deviceId = 'GjorupPi001'
+var Client = require('azure-iothub').Client;
+process.on("SIGINT", function(){
+  clearInterval(LedRoutine);
+});
+const deviceId = 'GjorupPi001'
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
 const iotHubConnectionString = 'HostName=GjorupHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=URJWNWCq0tqLXTV31fJdElARCxuwTt3MGiNBO13uOmQ=';
 //const iotHubConnectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
 
 
-//var client = Client.fromConnectionString(iotHubConnectionString);
+var client = Client.fromConnectionString(iotHubConnectionString);
 if (!iotHubConnectionString) {
   console.error(`Environment variable IotHubConnectionString must be specified.`);
   return;
@@ -72,4 +74,21 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
   });
 })().catch();
 
+function sendChangeLed(){
+var methodParams = {
+  methodName: 'SetLedRandom',
+  payload: Math.floor(Math.random() * Math.floor(3)), // Number of seconds.
+  responseTimeoutInSeconds: 30
+};
 
+// Call the direct method on your device using the defined parameters.
+client.invokeDeviceMethod(deviceId, methodParams, function (err, result) {
+  if (err) {
+      console.error('Failed to invoke method \'' + methodParams.methodName + '\': ' + err.message);
+  } else {
+      console.log('Response from ' + methodParams.methodName + ' on ' + deviceId + ':');
+      console.log(JSON.stringify(result, null, 2));
+  }
+});
+}
+const LedRoutine = setInterval(sendChangeLed, 6000);

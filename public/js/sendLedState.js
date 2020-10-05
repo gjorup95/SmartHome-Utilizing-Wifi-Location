@@ -1,6 +1,7 @@
 'use strict';
 
-var Client = require('azure-iothub').Client;
+function setLed(){
+  var Client = require('azure-iothub').Client;
 const deviceId = 'GjorupPi001'
 const iotHubConnectionString = 'HostName=GjorupHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=URJWNWCq0tqLXTV31fJdElARCxuwTt3MGiNBO13uOmQ=';
 var client = Client.fromConnectionString(iotHubConnectionString);
@@ -20,5 +21,6 @@ var methodParams = {
         console.log(JSON.stringify(result, null, 2));
     }
   });
+}
   
   
