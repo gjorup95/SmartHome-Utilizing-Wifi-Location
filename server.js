@@ -8,7 +8,10 @@ var Client = require('azure-iothub').Client;
 const deviceId = 'GjorupPi001'
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
-const iotHubConnectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
+const iotHubConnectionString = 'HostName=GjorupHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=URJWNWCq0tqLXTV31fJdElARCxuwTt3MGiNBO13uOmQ=';
+//const iotHubConnectionString = 'HostName=GjorupPi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oREm8bL3LGVub1PWhbCTS28KFWF5EbH9XdhZP1xeUb0=';
+
+
 var client = Client.fromConnectionString(iotHubConnectionString);
 if (!iotHubConnectionString) {
   console.error(`Environment variable IotHubConnectionString must be specified.`);

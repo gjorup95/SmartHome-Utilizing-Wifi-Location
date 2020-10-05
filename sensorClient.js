@@ -18,7 +18,9 @@ const Message = require('azure-iot-device').Message;
 
 // String containing Hostname, Device Id & Device Key in the following formats:
 //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
-const deviceConnectionString = "HostName=GjorupPi.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=MYrYqGrUPYFcEymr8os4vNpGTTzvGSRGNf24F9S1j4U=";
+//const deviceConnectionString = "HostName=GjorupPi.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=MYrYqGrUPYFcEymr8os4vNpGTTzvGSRGNf24F9S1j4U=";
+// NEW CONNECTION STRING
+const deviceConnectionString = "HostName=GjorupHub.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=CpsDZTRmNkwVkzWiU6KKZWrMTeLxNVMuFfcENeTgbZo="
 let client = Client.fromConnectionString(deviceConnectionString, Protocol);
 let sendInterval;
 
