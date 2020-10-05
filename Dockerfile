@@ -3,7 +3,7 @@
 FROM arm32v7/node:14-alpine
 
 
-RUN apk add --no-cache git python python-dev gcc g++ curl make ca-certificates && 
+RUN apk add --no-cache git python python-dev gcc g++ curl make ca-certificates 
 
 
 COPY package*.json ./
