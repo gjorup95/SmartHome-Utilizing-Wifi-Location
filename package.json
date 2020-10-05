@@ -4,23 +4,11 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "@azure/event-hubs": ">=5.0.2",
     "azure-iot-device": "^1.17.2",
-    "azure-iot-device-amqp": "^1.13.2",
     "azure-iot-device-mqtt": "^1.15.2",
-    "azure-iothub": "^1.13.0",
-    "bl": "^4.0.3",
-    "browserify": "^16.5.2",
-    "chalk": "^4.1.0",
-    "coap": "^0.24.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "msgpack5": "^4.2.1",
     "node-dht-sensor": "0.4.3",
-    "node-json2html": "^1.4.0",
     "onoff": "^6.0.0",
-    "pigpio": "^3.2.3",
-    "ws": "^7.3.1"
+    "pigpio": "^3.2.3"
   },
   "devDependencies": {},
   "scripts": {
