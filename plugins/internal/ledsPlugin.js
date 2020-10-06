@@ -4,8 +4,10 @@ var model = resources.pi.actuators.leds['1'];
 modelarray = resources.pi.actuators.leds;
 var pluginName = model.name;
 let stopBlinking = false;
-var led1state = 1;
 alreadyPlayed = false;
+var actuatorObject = {
+  actuators: []
+};
 
 
 exports.start = function (params) {
@@ -28,17 +30,19 @@ function check1(what) {
   for (i=1; i<4; i++){
     if (what[i].value === 0){
       stopBlinking = true;
-      actuator.writeSync(1);
+      //actuator.writeSync(1);
+      actuatorObject.actuators[i-1].writeSync(1);
       alreadyPlayed= false;
     }
      if (what[i].value=== 1){
       stopBlinking = true;
-      actuator.writeSync(0);
+      //actuator.writeSync(0);
+      actuatorObject.actuators[i-1].writeSync(0);
       alreadyPlayed = false;
     }
     if (what[i].value === 2 & alreadyPlayed === false){
       stopBlinking = false;
-      blinkLED();
+      blinkLED(i);
       alreadyPlayed = true;
          }
         }
@@ -46,22 +50,36 @@ function check1(what) {
 
 function connectHardware() {
   var Gpio = require('onoff').Gpio;
-   actuator = new Gpio(model.gpio, 'out'); //#D changed gpio from model.gpio
-  console.info('Hardware %s actuator started!', pluginName);  
+  console.log(model.length);
+  for (i=1; i<4; i++){
+    actuator = new Gpio(modelarray[i].gpio, 'out');
+    actuatorObject.actuators.push(actuator);
+    }
+  
+    //actuator = new Gpio(model.gpio, 'out'); //#D changed gpio from model.gpio
+    //actuatorObject.actuators.push(actuator);
+  console.info('Hardware %s actuator started!', pluginName); 
+ // Show that it actually holds all the 3 leds.
+  /*for (i=0; i<3; i++){
+    console.info(actuatorObject.actuators[i]);
+  }  */
 }
 
-function blinkLED(){
+function blinkLED(i){
+
+
+  
   const blinkLed = _ => {
     if (stopBlinking) {
       return;
       
     }
-    actuator.read((err, value) => {led1state = value ^1;// Asynchronous read
+    actuatorObject.actuators[i-1].read((err, value) =>  {// Asynchronous read
       if (err) {
         throw err;
       }
   
-      actuator.write(value ^ 1, err => {
+      actuatorObject.actuators[i-1].write(value ^ 1, err => {
        // Asynchronous write
         if (err) {
           throw err;
