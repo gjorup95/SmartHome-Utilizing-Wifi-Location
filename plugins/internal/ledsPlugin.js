@@ -18,11 +18,10 @@ exports.start = function (params) {
 };
 
 exports.stop = function () {
-  if (localParams.simulate) {
-    clearInterval(interval);
-  } else {
-    actuator.unexport();
-  }
+    for (i=0; i<3; i++){
+      actuatorObject.actuators[i].write(0);
+      actuatorObject.actuators[i].unexport();
+    }
   console.info('%s plugin stopped!', pluginName);
 };
 
@@ -50,7 +49,6 @@ function check1(what) {
 
 function connectHardware() {
   var Gpio = require('onoff').Gpio;
-  console.log(model.length);
   for (i=1; i<4; i++){
     actuator = new Gpio(modelarray[i].gpio, 'out');
     actuatorObject.actuators.push(actuator);

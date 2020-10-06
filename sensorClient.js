@@ -98,7 +98,11 @@ function connectCallback () {
 }
 
 // fromConnectionString must specify a transport constructor, coming from any transport package.
-
+process.on('SIGINT', function() {
+    console.log("Caught interrupt signal");
+    ledsPlugin.stop();
+    process.exit();
+});
 
 client.on('connect', connectCallback);
 client.on('error', errorCallback);
