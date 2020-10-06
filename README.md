@@ -22,3 +22,6 @@ Echo GPIO = 24
 # Docker
 1. docker pull gjorup95/milestone3client
 2. sudo docker run --rm -it -p 10503:10503 --privileged gjorup95/milestone3client:latest
+
+# Issues
+1. ledsPlugin.js does not properly update the physical state of all 3 connected leds, it simply updates the resources of the leds beyond the first.
