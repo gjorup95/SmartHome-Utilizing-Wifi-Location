@@ -69,15 +69,11 @@ function messageHandler (msg) {
 client.onDeviceMethod('SetLedRandom', onSetLedRandom);
 
 function generateMessage () {
-    const distanceData = resources.pi.sensors.distance.value;
-    const humidity = resources.pi.sensors.humidity.value;
-    const temperature = resources.pi.sensors.temperature.value;
-    const led1State = resources.pi.actuators.leds[1].value;
-    const led2State = resources.pi.actuators.leds[2].value;
-    const led3State = resources.pi.actuators.leds[3].value;
-    const data = JSON.stringify({ deviceId: 'TempAndLights', distanceData: distanceData, temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State});
+  
+    //const data = JSON.stringify({ deviceId: 'TempAndLights', temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State}); 
+    const data = JSON.stringify(resources.pi);
     const message = new Message(data);
-    message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
+    //message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
     return message;
 }
 
@@ -92,13 +88,16 @@ function connectCallback () {
         const message = generateMessage();
         console.log('Sending message: ' + message.getData());
         client.sendEvent(message, printResultFor('send'));
-    }, 2000);
+    }, 10000);
+
+
     
 }
 
 // fromConnectionString must specify a transport constructor, coming from any transport package.
 process.on('SIGINT', function() {
     console.log("Caught interrupt signal");
+    dhtPlugin.stop();
     ledsPlugin.stop();
     process.exit();
 });

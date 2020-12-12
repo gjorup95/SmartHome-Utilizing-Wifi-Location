@@ -1,50 +1,59 @@
 {
     "pi": {
-        "name": "Gjorup PI",
-        "description": "a web of things connected raspberry pi for the course p2p",
-        "port": 10503,
+        "name": "TempAndLights",
         "sensors": {
             "temperature": {
-                "name": "Temperature Sensor",
-                "description": "A dht11 temperature sensor",
+                "name": "Temperature",
+                "description": "DHT11 temperature readings",
                 "unit": "Celsius",
                 "value": 0,
                 "gpio": 4
             },
             "humidity": {
-                "name": "Humidity Sensor",
-                "description": "A dht11 humidity sensor",
+                "name": "Humidity",
+                "description": "DHT11 Humidity readings",
                 "unit": "%",
                 "value": 0,
                 "gpio": 4
-            },
-            "distance": {
-                "name": "Distance sensor",
-                "description": "a Ultrasonic distance sensor",
-                "unit": "Centimeter",
-                "value": 0,
-                "gpio.trigger": 23,
-                "gpio.echo": 24
-                 
             }
         },
         "actuators":    {
-            "leds":  {
-                "1": {
-                    "name": "LED1",
-                    "value": 2,
+            "name": "Lights",
+            "lights": 
+              {
+                "0": {
+                    "name": "Badeværelse",
+                    "value": 0,
                     "gpio":  17
                     
                 },
-                "2": {
-                    "name": "LED2",
-                    "value": 2,
+                "1": {
+                    "name": "Entrè",
+                    "value": 0,
                     "gpio": 2
                     
                 },
+                "2": {
+                    "name":"Køkken",
+                    "value": 0,
+                    "gpio": 22
+                    
+                },
                 "3": {
-                    "name":"LED3",
-                    "value": 2,
+                    "name":"Lager",
+                    "value": 0,
+                    "gpio": 22
+                    
+                },
+                "4": {
+                    "name":"Soveværelse",
+                    "value": 0,
+                    "gpio": 22
+                    
+                },
+                "5": {
+                    "name":"Stuen",
+                    "value": 0,
                     "gpio": 22
                     
                 }
