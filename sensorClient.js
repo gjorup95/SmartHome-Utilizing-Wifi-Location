@@ -2,13 +2,12 @@
 
 var resources = require('./resources/model');
 var ledsPlugin = require('./plugins/internal/ledsPlugin'), //#A
-  dhtPlugin = require('./plugins/internal/DHT22SensorPlugin'), //#A
-  ultraSonic = require('./plugins/internal/ultrasonicPlugin');
+  dhtPlugin = require('./plugins/internal/DHT22SensorPlugin');
 
 
 ledsPlugin.start({'simulate': false, 'frequency': 10000}); //#B
 dhtPlugin.start({'simulate': false, 'frequency': 10000}); //#B
-ultraSonic.start({'simulate': false, 'frequency': 10000});
+
 
 const Protocol = require('azure-iot-device-mqtt').Mqtt;
 
@@ -20,7 +19,7 @@ const Message = require('azure-iot-device').Message;
 //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
 //const deviceConnectionString = "HostName=GjorupPi.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=MYrYqGrUPYFcEymr8os4vNpGTTzvGSRGNf24F9S1j4U=";
 // NEW CONNECTION STRING
-const deviceConnectionString = "HostName=GjorupHub.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=CpsDZTRmNkwVkzWiU6KKZWrMTeLxNVMuFfcENeTgbZo="
+const deviceConnectionString = "HostName=gjorupSmartHome.azure-devices.net;DeviceId=TempAndLights;SharedAccessKey=Gu04P1cKKDVD+9DtTGnO3e9xSGzk1WgPMz7P6V2cp/k="
 let client = Client.fromConnectionString(deviceConnectionString, Protocol);
 let sendInterval;
 
@@ -76,7 +75,7 @@ function generateMessage () {
     const led1State = resources.pi.actuators.leds[1].value;
     const led2State = resources.pi.actuators.leds[2].value;
     const led3State = resources.pi.actuators.leds[3].value;
-    const data = JSON.stringify({ deviceId: 'Gjorup001', distanceData: distanceData, temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State});
+    const data = JSON.stringify({ deviceId: 'TempAndLights', distanceData: distanceData, temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State});
     const message = new Message(data);
     message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
     return message;
