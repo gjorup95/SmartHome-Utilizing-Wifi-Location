@@ -1,6 +1,7 @@
 {
     "pi": {
         "name": "TempAndLights",
+        "timestamp": "",
         "sensors": {
             "temperature": {
                 "name": "Temperature",
@@ -22,38 +23,44 @@
             "lights": 
               {
                 "0": {
-                    "name": "Badeværelse",
+                    "name": "badeværelse",
                     "value": 0,
+                    "timestamp": "",
                     "gpio":  17
                     
                 },
                 "1": {
-                    "name": "Entrè",
+                    "name": "entrè",
                     "value": 0,
+                    "timestamp": "",
                     "gpio": 2
                     
                 },
                 "2": {
-                    "name":"Køkken",
+                    "name":"køkken",
                     "value": 0,
+                    "timestamp": "",
                     "gpio": 22
                     
                 },
                 "3": {
-                    "name":"Lager",
+                    "name":"lager",
                     "value": 0,
+                    "timestamp": "",
                     "gpio": 22
                     
                 },
                 "4": {
-                    "name":"Soveværelse",
+                    "name":"soveværelse",
                     "value": 0,
+                    "timestamp": "",
                     "gpio": 22
                     
                 },
                 "5": {
-                    "name":"Stuen",
+                    "name":"stuen",
                     "value": 0,
+                    "timestamp": "",
                     "gpio": 22
                     
                 }

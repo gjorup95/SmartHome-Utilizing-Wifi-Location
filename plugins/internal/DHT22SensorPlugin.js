@@ -4,28 +4,24 @@ var interval, sensor;
 var model = resources.pi.sensors;
 var pluginName = 'Temperature & Humidity';
 var localParams = {'simulate': false, 'frequency': 5000};
+var sensor;
 
 exports.start = function (params) {
   localParams = params;
-  if (params.simulate) {
-    simulate();
-  } else {
+  
     connectHardware();
-  }
+  
 };
 
 exports.stop = function () {
-  if (params.simulate) {
-    clearInterval(interval);
-  } else {
-    sensor.unexport();
-  }
+    
+    sensor.stop;
   console.info('%s plugin stopped!', pluginName);
 };
 
 function connectHardware() {
  var sensorDriver = require('node-dht-sensor');
-  var sensor = {
+   sensor = {
     initialize: function () {
       return sensorDriver.initialize(11, model.temperature.gpio); //#A
     },

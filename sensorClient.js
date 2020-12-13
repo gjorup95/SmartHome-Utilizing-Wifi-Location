@@ -34,11 +34,7 @@ function onSetLedRandom(request, response) {
     }
   
     console.log('Direct method payload received:');
-    for (i=1; i<4; i++){
-        resources.pi.actuators.leds[i].value = request.payload;
     
-}
-    console.log(request.payload);
   
     // Check that a numeric value was passed as a parameter
     if (isNaN(request.payload)) {
@@ -54,6 +50,7 @@ function onSetLedRandom(request, response) {
       response.send(200, 'States of all leds set to:  ' + request.payload, directMethodResponse);
     }
   }
+  
 function disconnectHandler () {
     clearInterval(sendInterval);
     client.open().catch((err) => {
@@ -62,17 +59,54 @@ function disconnectHandler () {
 }
 
 function messageHandler (msg) {
+    var realData = JSON.parse(msg.data);
+    if (realData.brightness != undefined){
+        resources.pi.actuators.lights[0].value=2;
+    }
+    switch (realData.location){
+        case resources.pi.actuators.lights[0].name:
+            resources.pi.actuators.lights[0].value = realData.setValue;
+            break;
+
+            case resources.pi.actuators.lights[1].name:
+            resources.pi.actuators.lights[1].value = realData.setValue;
+            break;
+
+            case resources.pi.actuators.lights[2].name:
+            resources.pi.actuators.lights[2].value = realData.setValue;
+            break;
+
+            case resources.pi.actuators.lights[3].name:
+            resources.pi.actuators.lights[3].value = realData.setValue;
+            break;
+
+            case resources.pi.actuators.lights[4].name:
+            resources.pi.actuators.lights[4].value = realData.setValue;
+            break;
+
+            case resources.pi.actuators.lights[5].name:
+            resources.pi.actuators.lights[5].value = realData.setValue;
+            break;
+            default:
+                console.log("didnt match a location");
+    }
+    
     console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
     client.complete(msg, printResultFor('completed'));
     
 }
-client.onDeviceMethod('SetLedRandom', onSetLedRandom);
+client.onDeviceMethod('badeværelse', onSetLedRandom);
 
 function generateMessage () {
-  
+    //var formattedObject = 
+    //const dataFormatted = JSON.stringify({deviceId: 'TempAndLights', temp: resources.pi.sensors.temperature.value, hum: resources.pi.sensors.humidity.value});
     //const data = JSON.stringify({ deviceId: 'TempAndLights', temperature: temperature, humidity: humidity, led1State: led1State, led2State: led2State, led3State: led3State}); 
+    resources.pi.timestamp = new Date();
+    
     const data = JSON.stringify(resources.pi);
+    
     const message = new Message(data);
+    
     //message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
     return message;
 }
@@ -86,7 +120,8 @@ function connectCallback () {
     // Create a message and send it to the IoT Hub every two seconds
     sendInterval = setInterval(() => {
         const message = generateMessage();
-        console.log('Sending message: ' + message.getData());
+        
+        console.log('Sending message: ' + message.data);
         client.sendEvent(message, printResultFor('send'));
     }, 10000);
 
@@ -94,7 +129,6 @@ function connectCallback () {
     
 }
 
-// fromConnectionString must specify a transport constructor, coming from any transport package.
 process.on('SIGINT', function() {
     console.log("Caught interrupt signal");
     dhtPlugin.stop();
