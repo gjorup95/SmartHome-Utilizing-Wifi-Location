@@ -14,7 +14,8 @@ const Protocol = require('azure-iot-device-mqtt').Mqtt;
 const Client = require('azure-iot-device').Client;
 const Message = require('azure-iot-device').Message;
 
-
+var counter= 0;
+console.log(counter);
 // String containing Hostname, Device Id & Device Key in the following formats:
 //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
 //const deviceConnectionString = "HostName=GjorupPi.azure-devices.net;DeviceId=GjorupPi001;SharedAccessKey=MYrYqGrUPYFcEymr8os4vNpGTTzvGSRGNf24F9S1j4U=";
@@ -51,6 +52,9 @@ function onSetLedRandom(request, response) {
     }
   }
   
+  function test4seconds(){
+      console.log(counter);
+  }
 function disconnectHandler () {
     clearInterval(sendInterval);
     client.open().catch((err) => {
@@ -60,6 +64,9 @@ function disconnectHandler () {
 
 function messageHandler (msg) {
     var realData = JSON.parse(msg.data);
+    if(realData.test === "test"){
+        setTimeout(test4seconds, 4000);
+    }
     if (realData.brightness != undefined){
         resources.pi.actuators.lights[0].value=2;
     }
@@ -93,6 +100,7 @@ function messageHandler (msg) {
     
     console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
     client.complete(msg, printResultFor('completed'));
+    counter = counter +1;
     
 }
 client.onDeviceMethod('badeværelse', onSetLedRandom);
@@ -121,7 +129,7 @@ function connectCallback () {
     sendInterval = setInterval(() => {
         const message = generateMessage();
         
-        console.log('Sending message: ' + message.data);
+        //console.log('Sending message: ' + message.data);
         client.sendEvent(message, printResultFor('send'));
     }, 10000);
 
